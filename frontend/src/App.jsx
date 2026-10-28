@@ -24,6 +24,8 @@ import CreateBatch     from './pages/admin/CreateBatch';
 import BulkImport      from './pages/admin/BulkImport';
 import WeeklyReport    from './pages/admin/WeeklyReport';
 import HolidayList     from './pages/admin/HolidayList';
+import SuperAdminDashboard from './pages/superadmin/Dashboard';
+import CreateAdmin     from './pages/superadmin/CreateAdmin';
 
 // Staff
 import StaffDashboard  from './pages/staff/Dashboard';
@@ -51,6 +53,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+
+        {/* SUPERADMIN */}
+        <Route path="/superadmin" element={<ProtectedRoute role="SUPERADMIN"><AppShell /></ProtectedRoute>}>
+          <Route index element={<SuperAdminDashboard />} />
+          <Route path="create-admin" element={<CreateAdmin />} />
+        </Route>
 
         {/* ADMIN */}
         <Route path="/admin" element={<ProtectedRoute role="ADMIN"><AppShell /></ProtectedRoute>}>

@@ -18,10 +18,14 @@ import {
   Download,
   ShieldCheck,
   GraduationCap,
+  MapPin,
+  Sparkles,
 } from 'lucide-react';
 import useAuthStore from '../store/authStore';
 import logoImg from '../assets/images.jpg';
 import landingBg from '../assets/landing-bg.svg';
+import collegeBannerImg from '../assets/logo_banner.webp';
+import campusImg from '../assets/avcce_entrance_new.webp';
 import styles from './Landing.module.css';
 
 const DASHBOARD = { ADMIN: '/admin', STAFF: '/staff', STUDENT: '/student' };
@@ -79,13 +83,26 @@ export default function Landing() {
   return (
     <div className={styles.page} style={{ backgroundImage: `url(${landingBg})` }}>
 
+      {/* ── College banner strip ── */}
+      <div className={styles.collegeBanner}>
+        <div className={styles.collegeBannerInner}>
+          <img
+            src={collegeBannerImg}
+            alt="AVCCE — College Banner"
+            className={styles.collegeBannerImg}
+          />
+        </div>
+      </div>
+
       {/* ── Floating pill navbar ── */}
       <header className={styles.navWrap}>
         <nav className={styles.pill}>
-          <Link to="/" className={styles.brand}>
-            <img src={logoImg} alt="AttendSync Logo" className={styles.brandMarkImg} />
-            AttendSync
-          </Link>
+          <div className={styles.brandGroup}>
+            <Link to="/" className={styles.brand}>
+              <img src={logoImg} alt="AttendSync Logo" className={styles.brandMarkImg} />
+              AttendSync
+            </Link>
+          </div>
           <div className={styles.navLinks}>
             <a href="#platform" className={styles.navLink}>Platform</a>
             <span className={styles.navDot}>·</span>
@@ -114,7 +131,20 @@ export default function Landing() {
 
       {/* ── Hero ── */}
       <section className={styles.hero}>
-        <div className={styles.heroLeft}>
+        {/* college front view — always visible on open */}
+        <div className={styles.heroMedia}>
+          <span className={styles.campusGlow} aria-hidden="true" />
+          <figure className={styles.campusFrame}>
+            <img
+              src={campusImg}
+              alt="AVCCE campus front view"
+              className={styles.campusImg}
+            />
+            <span className={styles.campusShade} aria-hidden="true" />
+          </figure>
+        </div>
+
+        <div className={styles.heroCopy}>
           <h1 className={styles.h1}>
             Focus on <span className={styles.accent}>Learning,</span><br />
             We&rsquo;ll Handle the<br />
@@ -141,8 +171,10 @@ export default function Landing() {
             <span className={styles.indicator}><BarChart3 size={13} /> Instant Reports</span>
           </div>
         </div>
+      </section>
 
-        {/* ── Floating dashboard composition ── */}
+      {/* ── Floating dashboard composition ── */}
+      <section className={styles.heroDash}>
         <div id="platform" className={styles.dashStage}>
 
           {/* main card */}
@@ -336,7 +368,7 @@ export default function Landing() {
           <img src={logoImg} alt="AttendSync Logo" className={styles.brandMarkSmallImg} />
           AttendSync
         </span>
-        <span>© {new Date().getFullYear()} AttendSync · Smart Academic Attendance Management</span>
+        <span>© {new Date().getFullYear()} AttendSync · AVCCE · Smart Academic Attendance Management</span>
       </footer>
     </div>
   );

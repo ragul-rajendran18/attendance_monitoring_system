@@ -9,7 +9,7 @@ import PageTitle from '../../components/ui/PageTitle';
 import styles   from './Form.module.css';
 
 export default function CreateSubject() {
-  const [form, setForm] = useState({ subject_code: '', subject_name: '', class_name: '' });
+  const [form, setForm] = useState({ subject_code: '', subject_name: '', year: '' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
@@ -17,14 +17,14 @@ export default function CreateSubject() {
 
   async function submit(e) {
     e.preventDefault();
-    if (!form.subject_code || !form.subject_name || !form.class_name) {
+    if (!form.subject_code || !form.subject_name || !form.year) {
       toast.error('All fields are required'); return;
     }
     setLoading(true);
     try {
       const { data } = await API.post('/create-subject/', form);
       setResult(data.subject);
-      setForm({ subject_code: '', subject_name: '', class_name: '' });
+      setForm({ subject_code: '', subject_name: '', year: '' });
       toast.success('Subject created successfully');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to create subject');
@@ -33,7 +33,7 @@ export default function CreateSubject() {
 
   return (
     <div className="fade-up">
-      <PageTitle sub="Add a subject to a class">Create Subject</PageTitle>
+      <PageTitle sub="Add a subject to a department year">Create Subject</PageTitle>
       <div className={styles.grid}>
         <Card>
           <form onSubmit={submit} className={styles.formBody}>
@@ -41,23 +41,22 @@ export default function CreateSubject() {
               value={form.subject_code} onChange={(e) => set('subject_code', e.target.value)} />
             <Input label="Subject Name" placeholder="e.g. Database Systems"
               value={form.subject_name} onChange={(e) => set('subject_name', e.target.value)} />
-            <Input label="Class Name"   placeholder="e.g. II IT A"
-              value={form.class_name}   onChange={(e) => set('class_name', e.target.value)} />
+            <Input label="Year" placeholder="e.g. II"
+              value={form.year} onChange={(e) => set('year', e.target.value)} />
             <Button type="submit" variant="primary" loading={loading} style={{ width: '100%' }}>
               Create Subject
             </Button>
           </form>
           {result && (
             <div className={styles.resultFlash}>
-              {result.subject_code} &nbsp;·&nbsp; {result.subject_name} &nbsp;·&nbsp; {result.class_name}
+              {result.subject_code} &nbsp;·&nbsp; {result.subject_name} &nbsp;·&nbsp; Year {result.year}
             </div>
           )}
         </Card>
 
         <Card flat>
           <div className={styles.helpHead}><Info size={14} className={styles.helpIcon} />Class subjects</div>
-          <p className={styles.helpText}>Subjects are grouped by class name. Staff select a class in their dashboard to see its subjects.</p>
-          <p className={styles.helpText}>Use the same class name format consistently — e.g. <strong>II IT A</strong>.</p>
+          <p className={styles.helpText}>Subjects are assigned to your department automatically. Staff select their section (e.g. <strong>II IT A</strong>) and see all subjects for that year.</p>
         </Card>
       </div>
     </div>

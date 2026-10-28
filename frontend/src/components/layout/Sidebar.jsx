@@ -45,6 +45,14 @@ const NAV = {
       { to: '/student/profile', label: 'Profile',    icon: User },
     ],
   },
+  SUPERADMIN: {
+    Overview: [
+      { to: '/superadmin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+    ],
+    Administration: [
+      { to: '/superadmin/create-admin', label: 'Create Admin', icon: UserPlus },
+    ],
+  },
 };
 
 export default function Sidebar() {

@@ -26,7 +26,7 @@ export default function Login() {
       const { data } = await API.post('/login/', form);
       setAuth({ role: data.role, username: form.username }, data.access, data.refresh);
       toast.success('Welcome back!');
-      const routes = { ADMIN: '/admin', STAFF: '/staff', STUDENT: '/student' };
+      const routes = { SUPERADMIN: '/superadmin', ADMIN: '/admin', STAFF: '/staff', STUDENT: '/student' };
       navigate(routes[data.role] || '/login');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Invalid credentials');

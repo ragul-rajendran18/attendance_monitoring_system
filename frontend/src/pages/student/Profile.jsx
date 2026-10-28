@@ -37,6 +37,7 @@ export default function StudentProfile() {
             { key: 'Register No.', val: profile.register_no },
             { key: 'Class',        val: profile.class_name  },
             { key: 'Role',         val: profile.role        },
+            { key: 'department',   val: profile.department  }
           ].map(({ key, val }) => (
             <div key={key} className={styles.infoItem}>
               <div className={styles.infoKey}>{key}</div>

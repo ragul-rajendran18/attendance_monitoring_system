@@ -36,7 +36,7 @@ export default function WeeklyReport() {
     });
     try {
       const resp = await fetch(
-        `https://smart-attendance-system-edf8.onrender.com/api/weekly-report/excel/?${q}`,
+        `http://localhost:8000/api/weekly-report/excel/?${q}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('access')}` } }
       );
       if (!resp.ok) {
