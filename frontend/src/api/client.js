@@ -27,7 +27,7 @@ API.interceptors.response.use(
       }
       try {
         const { data } = await axios.post(
-          'http://localhost:8000/api/token/refresh/',
+          'https://attendance-monitoring-system-2-lh9a.onrender.com/api/token/refresh/',
           { refresh }
         );
         localStorage.setItem('access', data.access);
