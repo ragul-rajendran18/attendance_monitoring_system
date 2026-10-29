@@ -4,8 +4,11 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.pytest_cache/
 .git/
 .gitignore
 .env
+.env.*
+staticfiles/
 .DS_Store
 db.sqlite3
