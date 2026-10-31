@@ -214,6 +214,78 @@ from .models import Attendance, AttendanceSession
 
 @api_view(["GET"])
 @permission_classes([IsSuperAdminRole])
+def admin_list(request):
+    admins = User.objects.filter(role="ADMIN").order_by("first_name", "admin_id")
+    return Response({"admins": [
+        {
+            "id": admin.id,
+            "name": admin.get_full_name() or admin.first_name or admin.username,
+            "admin_id": admin.admin_id,
+            "department": admin.department,
+            "username": admin.username,
+        }
+        for admin in admins
+    ]})
+
+
+@api_view(["PUT"])
+@permission_classes([IsSuperAdminRole])
+def update_admin(request):
+    admin_pk = request.data.get("id")
+    if not admin_pk:
+        return Response({"message": "Admin id is required"}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        admin = User.objects.get(id=admin_pk, role="ADMIN")
+    except User.DoesNotExist:
+        return Response({"message": "Admin not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    name = request.data.get("name", "").strip()
+    admin_code = request.data.get("admin_id", "").strip()
+    department = request.data.get("department", "").strip()
+    password = request.data.get("password")
+
+    if not name or not admin_code or not department:
+        return Response(
+            {"message": "name, admin_id and department are required"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    if User.objects.filter(admin_id__iexact=admin_code).exclude(id=admin.id).exists():
+        return Response({"message": "Admin ID already exists"}, status=status.HTTP_400_BAD_REQUEST)
+
+    admin.first_name = name
+    admin.admin_id = admin_code
+    admin.department = department
+    if password:
+        admin.set_password(password)
+    admin.save()
+    return Response({
+        "message": "Admin updated successfully",
+        "admin": {
+            "id": admin.id,
+            "name": admin.get_full_name() or admin.first_name or admin.username,
+            "admin_id": admin.admin_id,
+            "department": admin.department,
+            "username": admin.username,
+        },
+    })
+
+
+@api_view(["DELETE"])
+@permission_classes([IsSuperAdminRole])
+def delete_admin(request):
+    admin_pk = request.data.get("id") or request.query_params.get("id")
+    if not admin_pk:
+        return Response({"message": "Admin id is required"}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        admin = User.objects.get(id=admin_pk, role="ADMIN")
+    except User.DoesNotExist:
+        return Response({"message": "Admin not found"}, status=status.HTTP_404_NOT_FOUND)
+    admin.delete()
+    return Response({"message": "Admin deleted successfully"})
+
+
+@api_view(["GET"])
+@permission_classes([IsSuperAdminRole])
 def department_daily_attendance(request):
     today = timezone.localdate()
 

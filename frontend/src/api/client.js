@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://attendance-monitoring-system-2-lh9a.onrender.com/api';
+
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: API_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -27,7 +29,7 @@ API.interceptors.response.use(
       }
       try {
         const { data } = await axios.post(
-          'http://localhost:8000/api/token/refresh/',
+          `${API_BASE_URL}/token/refresh/`,
           { refresh }
         );
         localStorage.setItem('access', data.access);

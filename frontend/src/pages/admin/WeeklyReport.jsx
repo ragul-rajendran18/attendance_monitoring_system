@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Download, Info } from 'lucide-react';
 import toast from 'react-hot-toast';
-import API      from '../../api/client';
+import API, { API_BASE_URL } from '../../api/client';
 import Card     from '../../components/ui/Card';
 import Input    from '../../components/ui/Input';
 import Select   from '../../components/ui/Select';
@@ -36,7 +36,7 @@ export default function WeeklyReport() {
     });
     try {
       const resp = await fetch(
-        `http://localhost:8000/api/weekly-report/excel/?${q}`,
+        `${API_BASE_URL}/weekly-report/excel/?${q}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('access')}` } }
       );
       if (!resp.ok) {
