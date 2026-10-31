@@ -3,7 +3,7 @@ import axios from 'axios';
 export const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 const API = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: 'http://localhost:8000/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -29,7 +29,7 @@ API.interceptors.response.use(
       }
       try {
         const { data } = await axios.post(
-          `${API_BASE_URL}/token/refresh/`,
+          'http://localhost:8000/api/token/refresh/',
           { refresh }
         );
         localStorage.setItem('access', data.access);
