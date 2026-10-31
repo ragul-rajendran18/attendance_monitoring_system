@@ -26,6 +26,7 @@ import WeeklyReport    from './pages/admin/WeeklyReport';
 import HolidayList     from './pages/admin/HolidayList';
 import SuperAdminDashboard from './pages/superadmin/Dashboard';
 import CreateAdmin     from './pages/superadmin/CreateAdmin';
+import AdminList       from './pages/superadmin/AdminList';
 
 // Staff
 import StaffDashboard  from './pages/staff/Dashboard';
@@ -57,6 +58,7 @@ export default function App() {
         {/* SUPERADMIN */}
         <Route path="/superadmin" element={<ProtectedRoute role="SUPERADMIN"><AppShell /></ProtectedRoute>}>
           <Route index element={<SuperAdminDashboard />} />
+          <Route path="admin-list"   element={<AdminList />} />
           <Route path="create-admin" element={<CreateAdmin />} />
         </Route>
 

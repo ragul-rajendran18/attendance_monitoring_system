@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://attendance-monitoring-system-2-lh9a.onrender.com/api';
+export const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 const API = axios.create({
   baseURL: API_BASE_URL,
@@ -14,7 +14,7 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// On 401 — try refresh, retry original request once
+// On 401 �?" try refresh, retry original request once
 API.interceptors.response.use(
   (res) => res,
   async (error) => {

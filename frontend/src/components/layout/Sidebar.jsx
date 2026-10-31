@@ -50,6 +50,7 @@ const NAV = {
       { to: '/superadmin', label: 'Dashboard', icon: LayoutDashboard, end: true },
     ],
     Administration: [
+      { to: '/superadmin/admin-list',   label: 'Admin List',   icon: Users },
       { to: '/superadmin/create-admin', label: 'Create Admin', icon: UserPlus },
     ],
   },

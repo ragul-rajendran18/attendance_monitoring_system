@@ -7,6 +7,9 @@ from .views import (
     logout,
     admin_dashboard,
     create_admin,
+    admin_list,
+    update_admin,
+    delete_admin,
     create_student,
     student_profile,
     student_attendance,
@@ -53,6 +56,9 @@ urlpatterns = [
     # ── Admin dashboard ──
     path("admin/dashboard/",        admin_dashboard),
     path("superadmin/create-admin/", create_admin),
+    path("superadmin/admin-list/",  admin_list),
+    path("superadmin/update-admin/", update_admin),
+    path("superadmin/delete-admin/", delete_admin),
     path("dashboard/super-admin/department-attendance/",department_daily_attendance),
 
     # ── Students ──

@@ -56,10 +56,6 @@ SECRET_KEY = required_env('SECRET_KEY')
 DEBUG = env_bool('DEBUG', False)
 ALLOWED_HOSTS = env_list('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
 
-render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if render_hostname and render_hostname not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append(render_hostname)
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,7 +78,7 @@ CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS', [
     "http://localhost:3000",
     "http://127.0.0.1:5173",
     "http://0.0.0.0:8000",
-    "https://attendance-monitoring-system-dun.vercel.app",
+    "https://attendance-monitoring-system-e79i.vercel.app",
 ])
 
 CSRF_TRUSTED_ORIGINS = env_list('CSRF_TRUSTED_ORIGINS', CORS_ALLOWED_ORIGINS)
