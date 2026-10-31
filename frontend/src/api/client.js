@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const API_BASE_URL = 'http://127.0.0.1:8000/api';
+export const API_BASE_URL = 'https://attendance-monitoring-system-2-lh9a.onrender.com/api';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://attendance-monitoring-system-2-lh9a.onrender.com/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -29,7 +29,7 @@ API.interceptors.response.use(
       }
       try {
         const { data } = await axios.post(
-          'http://localhost:8000/api/token/refresh/',
+          'https://attendance-monitoring-system-2-lh9a.onrender.com/token/refresh/',
           { refresh }
         );
         localStorage.setItem('access', data.access);
