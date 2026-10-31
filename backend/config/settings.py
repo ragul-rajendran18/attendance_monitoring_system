@@ -54,7 +54,7 @@ SECRET_KEY = required_env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool('DEBUG', False)
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','https://attendance-monitoring-system-2-lh9a.onrender.com']
 
 # Application definition
 
